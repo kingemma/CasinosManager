@@ -1,0 +1,35 @@
+<div class="header">
+  <p class="title">CasinosManager</p>
+  <button class="collapsed" type="button" (click)="smallMenuShow()">
+    <span class="icon-bar"></span>
+    <span class="icon-bar"></span>
+    <span class="icon-bar"></span>
+  </button>
+  <div class="user">
+    <nz-dropdown>
+      <a nz-dropdown>
+        {{userinfo.name}}<i nz-icon type="down"></i>
+      </a>
+      <ul nz-menu nzSelectable>
+        <li nz-menu-item>
+          <a>个人设置</a>
+        </li>
+        <li nz-menu-item>
+          <a>注销</a>
+        </li>
+      </ul>
+    </nz-dropdown>
+  </div>
+</div>
+
+<div class="nav-large">
+  <app-sider-bar></app-sider-bar>
+</div>
+
+<div class="nav-small " [style.display]="isSmallMenuShow ? 'block' : 'none'">
+  <app-sider-bar></app-sider-bar>
+</div>
+
+<div class="content">
+  <router-outlet></router-outlet>
+</div>

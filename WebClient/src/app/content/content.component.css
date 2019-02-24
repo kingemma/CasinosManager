@@ -1,0 +1,104 @@
+
+
+
+.nav-large {
+    width: 200px;
+    float: left;
+    height: 100%;
+}
+
+.nav-small {
+    width: 200px;
+    position: absolute;
+    background-color: gainsboro;
+    display: none;
+    z-index: 100;
+}
+
+.btn-link{
+    color: white;
+}
+
+@media screen and (min-width:768px) {
+    .header {
+        height: 50px;
+        background-color: rgb(10, 10, 10);
+    }
+
+    .title {
+        display: inline-block;
+        color: white;
+        line-height: 50px;
+    }
+
+    .user {
+        float: right;
+        color: white;
+        margin-right: 50px;
+        line-height: 50px;
+    }
+
+    .nav-large {
+        display: block;
+    }
+
+    .nav-small {
+        display: none;
+    }
+
+    .collapsed {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .header {
+        text-align: center;
+        height: 40px;
+        background-color: rgb(10, 10, 10);
+    }
+
+    .title {
+        display: inline-block;
+        color: white;
+        line-height: 40px;
+    }
+
+    .user {
+        float: right;
+        color: white;
+        margin-right: 50px;
+        line-height: 40px;
+    }
+
+    .nav-large {
+        display: none;
+    }
+
+    .collapsed {
+        width: 40px;
+        height: 40px;
+        float: left;
+        background-color: transparent;
+        background-image: none;
+        border: 1px solid transparent;
+        cursor: pointer;
+        outline:none;
+    }
+
+        .collapsed:active {
+            border: 1px solid transparent;
+        }
+
+        .collapsed .icon-bar {
+            display: block;
+            width: 22px;
+            height: 2px;
+            border-radius: 1px;
+            background-color: white;
+        }
+
+            .collapsed .icon-bar + .icon-bar {
+                margin-top: 4px;
+            }
+}

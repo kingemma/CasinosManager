@@ -1,0 +1,69 @@
+<div class="row">
+  <div class="section col-xs-12 col-md-12 col-lg-12">
+    <form nz-form class="ant-advanced-search-form">
+      <div class="row">
+        <div class="col-xs-12 col-md-6 col-lg-3">
+          <div class="row">
+            <label class="col-xs-4 col-md-4 col-lg-4 col-form-label" for="name">姓名</label>
+            <div class="col-xs-8 col-md-8 col-lg-8">
+              <input nz-input name="name" [(ngModel)]="queryInput.name">
+            </div>
+          </div>
+        </div>
+        <div class="col-xs-12 col-md-6 col-lg-3">
+          <div class="row">
+            <label class="col-xs-4 col-md-4 col-lg-4 col-form-label" for="from">开始时间</label>
+            <div class="col-xs-8 col-md-8 col-lg-8">
+              <nz-date-picker name="from" [(ngModel)]="queryInput.createFrom"></nz-date-picker>
+            </div>
+          </div>
+        </div>
+        <div class="col-xs-12 col-md-6 col-lg-3">
+          <div class="row">
+            <label class="col-xs-4 col-md-4 col-lg-4 col-form-label" for="to">结束时间</label>
+            <div class="col-xs-8 col-md-8 col-lg-8">
+              <nz-date-picker name="to" [(ngModel)]="queryInput.createTo"></nz-date-picker>
+            </div>
+          </div>
+        </div>
+        <div class="col-xs-12 col-md-6 col-lg-3">
+          <div style="text-align: right; margin-top: 11px">
+            <button nz-button nzType="primary" (click)="searchData()">查询</button>
+            <button nz-button (click)="resetForm()">清空</button>
+            <button nz-button nzType="primary" (click)="add()">新建</button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+
+
+  <div class="table-responsive">
+    <nz-table #borderedTable nzBordered nzSize="middle" [nzLoading]="loading" [nzData]="students" nzFrontPagination="false"
+      [nzTotal]="pagedInput.total" [(nzPageIndex)]="pagedInput.page" [(nzPageSize)]="pagedInput.pageSize"
+      (nzPageIndexChange)="searchData()">
+      <thead>
+        <tr>
+          <th style="width:50px"> # </th>
+          <th> 姓名 </th>
+          <th> 年龄 </th>
+          <th> 性别 </th>
+          <th> 创建时间 </th>
+          <th> 操作 </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let student of borderedTable.data; let i = index">
+          <td>{{start + i}}</td>
+          <td>{{student.name}}</td>
+          <td>{{student.age}}</td>
+          <td>{{student.sex}}</td>
+          <td>{{student.createTimeStr}}</td>
+          <td><a (click)="edit(student)">编辑</a></td>
+        </tr>
+      </tbody>
+    </nz-table>
+  </div>
+
+  <app-student-edit #studentEditModal (modalSave)="searchData()"></app-student-edit>
+</div>

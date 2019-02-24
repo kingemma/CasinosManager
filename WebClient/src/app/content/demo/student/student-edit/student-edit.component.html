@@ -1,0 +1,35 @@
+<nz-modal [(nzVisible)]="isModalVisible" nzTitle="学生信息编辑" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()">
+  <form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm($event,validateForm.value)" *ngIf="studentModel">
+    <nz-form-item>
+      <nz-form-label [nzSpan]="7" nzRequired>姓名</nz-form-label>
+      <nz-form-control [nzSpan]="12" nzHasFeedback>
+        <input nz-input formControlName="name" [(ngModel)]="studentModel.name">
+        <nz-form-explain *ngIf="validateForm.get('name').dirty && validateForm.get('name').errors || validateForm.get('name').pending ">
+          <ng-container *ngIf="validateForm.get('name').hasError('required')">
+            请输入姓名
+          </ng-container>
+        </nz-form-explain>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-label [nzSpan]="7" nzRequired>年龄</nz-form-label>
+      <nz-form-control [nzSpan]="12" nzHasFeedback>
+        <nz-input-number formControlName="age" [(ngModel)]="studentModel.age" [nzMin]="7" [nzMax]="24" [nzStep]="1"></nz-input-number>
+        <nz-form-explain *ngIf="validateForm.get('age').dirty && validateForm.get('age').errors || validateForm.get('age').pending ">
+          <ng-container *ngIf="validateForm.get('age').hasError('required')">
+            请输入年龄
+          </ng-container>
+        </nz-form-explain>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-label [nzSpan]="7" nzRequired>性别</nz-form-label>
+      <nz-form-control [nzSpan]="12" nzHasFeedback>
+          <nz-radio-group formControlName="sex" [(ngModel)]="studentModel.sex">
+              <label nz-radio nzValue="男">男</label>
+              <label nz-radio nzValue="女">女</label>
+            </nz-radio-group>
+      </nz-form-control>
+    </nz-form-item>
+  </form>
+</nz-modal>
