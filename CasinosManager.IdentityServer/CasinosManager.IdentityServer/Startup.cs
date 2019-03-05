@@ -1,7 +1,10 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using CasinosManager.IdentityServer.Domain;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using System.IO;
 
 namespace CasinosManager.IdentityServer
 {
@@ -16,10 +19,10 @@ namespace CasinosManager.IdentityServer
              .AddInMemoryApiResources(Config.GetApiResources())
              .AddInMemoryIdentityResources(Config.GetIdentityResource())
              .AddInMemoryClients(Config.GetClients())
-             .AddResourceOwnerValidator<AccountValidator>()
-             .AddProfileService<ProfileService>()
-             .AddCorsPolicyService<CorsPolicyService>();
-             //.AddTestUsers(Config.GetUsers());
+             .AddResourceOwnerValidator<ResourceOwnerValidator>()
+             .AddProfileService<ProfileService>();
+
+            DataContext.DBPath = ConfigurationManager.Configuration.GetConnectionString("db");
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -31,12 +34,6 @@ namespace CasinosManager.IdentityServer
             }
 
             app.UseIdentityServer();
-
-            app.UseCors(buider =>
-            {
-                buider.WithOrigins("http://localhost:4200")
-                .AllowAnyHeader();
-            });
 
             app.Run(async (context) =>
             {
